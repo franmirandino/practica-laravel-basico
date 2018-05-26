@@ -19,11 +19,6 @@ class PagesController extends Controller
     	return view('home');
     }
 
-    public function contact()
-    {
-    	return view('contactos');
-    }
-
     public function saludo($nombre = 'invitado')
     {
     	
@@ -32,10 +27,4 @@ class PagesController extends Controller
     	return view('saludo', compact('html', 'nombre'));
     }
 
-    public function mensajes(CreateMessageRequest $request)
-    {
-    	$data = $request->all();
-
-    	return back()->with('info', 'Tu mensaje ha sido enviado correctamente');
-    }
 }
