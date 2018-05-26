@@ -10,8 +10,8 @@
 	@else
 
 
-	<form method="POST" action="contacto">
-		{{ csrf_token() }}
+	<form method="POST" action="{{ route('messages.store') }}">		
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">		
 		<label for="nombre">
 			Nombre
 			<input type="text" name="nombre" value="{{ old('nombre') }}">
