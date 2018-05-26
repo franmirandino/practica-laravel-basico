@@ -11,6 +11,7 @@
 
 
 	<form method="POST" action="contacto">
+		{{ csrf_token() }}
 		<label for="nombre">
 			Nombre
 			<input type="text" name="nombre" value="{{ old('nombre') }}">

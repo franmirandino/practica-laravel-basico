@@ -1,7 +1,7 @@
 <?php
 
 
-Route::get('/', ['as' => 'home' , 'uses' => 'PagesController@home']);
+Route::get('/', ['as' => 'home' , 'uses' => 'PagesController@home'])->middleware('example');
 
 Route::get('contactame', ['as' => 'contactos', 'uses' => 'PagesController@contact']);
 
