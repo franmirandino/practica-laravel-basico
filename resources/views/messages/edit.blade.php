@@ -4,7 +4,7 @@
 
 	<h1>Editar mensaje</h1>
 
-	<form method="POST" action="{{ route('messages.update', $message->id) }}">		
+	<form method="POST" action="{{ route('mensajes.update', $message->id) }}">		
 		{{ method_field('PUT') }} {{ csrf_field() }}		
 		<label for="nombre">
 			Nombre
