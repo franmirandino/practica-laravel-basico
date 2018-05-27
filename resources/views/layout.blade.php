@@ -9,7 +9,7 @@
 	<header>
 
 		<nav class="navbar navbar-default" role="navigation">
-			<div class="container-fluid">
+			<div class="container">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -24,18 +24,33 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Link</a></li>
-						<li><a href="#">Link</a></li>
+						<li class="{{ activeMenu('/') }}">
+							<a href="{{ route('home') }}">Inicio</a>
+						</li>
+						<li class="{{ activeMenu('saludos*') }}">
+							<a href="{{ route('saludos') }}">Saludo</a>
+						</li>
+						<li class="{{ activeMenu('mensajes/create') }}">
+							<a href="{{ route('mensajes.create') }}">Contactos</a>						
+						</li>							
+
+						@if(auth()->check())
+							<li class="{{ activeMenu('mensajes') }}">
+								<a href="{{ route('mensajes.index') }}">Mensajes</a>
+							</li>													
+						@endif									
 					</ul>
-					<form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Search">
-						</div>
-						<button type="submit" class="btn btn-default">Submit</button>
-					</form>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Link</a></li>
-						<li class="dropdown">
+						@if(auth()->guest())
+							<li class="{{ activeMenu('/login') }}">
+								<a href="/login">Login</a>
+							</li>
+						@else
+							<li>
+								<a href="/logout">Cerrar sesión de {{ auth()->user()->name }}</a>	
+							</li>
+						@endif	
+						{{-- <li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="#">Action</a></li>
@@ -43,7 +58,7 @@
 								<li><a href="#">Something else here</a></li>
 								<li><a href="#">Separated link</a></li>
 							</ul>
-						</li>
+						</li> --}}
 					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div>
@@ -56,23 +71,14 @@
 				return request()->is($url) ? 'active' : '';
 			}
 		?>
-		<nav>
-			<a class="{{ activeMenu('/') }}" href="{{ route('home') }}">Inicio</a>
-			<a class="{{ activeMenu('saludos*') }}" href="{{ route('saludos') }}">Saludo</a>
-			<a class="{{ activeMenu('mensajes/create') }}" href="{{ route('mensajes.create') }}">Contactos</a>
-
-			@if(auth()->check())
-				<a class="{{ activeMenu('mensajes') }}" href="{{ route('mensajes.index') }}">Mensajes</a>
-				<a href="/logout">Cerrar sesión de {{ auth()->user()->name }}</a>
-			@endif
-			@if(auth()->guest())
-				<a class="{{ activeMenu('/login') }}" href="/login">Login</a>
-			@endif
-		</nav>
 	</header>
-	
-	@yield('contenido')
+	<div class="container">
+		
+		@yield('contenido')
 
-	<footer>Copyrigth {{ date('Y') }}</footer>
+		<footer>Copyrigth {{ date('Y') }}</footer>
+		
+	</div>
+	
 </body>
 </html>

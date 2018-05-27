@@ -8,25 +8,25 @@
 		{{ method_field('PUT') }} {{ csrf_field() }}		
 		<label for="nombre">
 			Nombre
-			<input type="text" name="nombre" value="{{ old('nombre', $message->nombre) }}">
+			<input class="form-control" type="text" name="nombre" value="{{ old('nombre', $message->nombre) }}">
 		{!! $errors->first('nombre', '<span class=error>:message</span>') !!}
 		</label><br><br>
 
 		<label for="email">
 			Email
-			<input type="email" name="email" value="{{ old('email', $message->email) }}">
+			<input class="form-control" type="email" name="email" value="{{ old('email', $message->email) }}">
 		</label>
 		{!! $errors->first('email', '<span class=error>:message</span>') !!}
 		<br><br>
 
 		<label for="mensaje">
 			Mensaje
-			<textarea name="mensaje">{{ old('mensaje', $message->mensaje) }}</textarea>
+			<textarea class="form-control" name="mensaje">{{ old('mensaje', $message->mensaje) }}</textarea>
 		</label>
 		{!! $errors->first('mensaje', '<span class=error>:message</span>') !!}
 		<br>
 
-		<input type="submit" value="Enviar">
+		<input class="btn btn-primary" type="submit" value="Enviar">
 	</form>
 
 @endsection
