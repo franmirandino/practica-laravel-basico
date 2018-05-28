@@ -46,16 +46,17 @@ class MessagesController extends Controller
      */
     public function store(Request $request)
     {
-        //guardar el mensaje
-        // DB::table('messages')->insert([
-        //     "nombre" => $request->input('nombre'),
-        //     "email" => $request->input('email'),
-        //     "mensaje" => $request->input('mensaje'),
-        //     "created_at" => Carbon::now(),
-        //     "updated_at" => Carbon::now()
-        // ]);
-
         $message = Message::create($request->all());
+
+        // if( auth()->check() )
+        // {
+
+        //     auth()->user()->messages()->save($message);
+        // }
+        // auth()->user()->messages()->create($request->all());
+
+        $message->user_id = auth()->id();
+        $message->save();
 
         //redireccionar
         return redirect()->route('mensajes.create')->with('info', 'Hemos recibido su mensaje');
