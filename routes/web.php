@@ -2,11 +2,14 @@
 
 
 // App\User::create([
-// 	'name' => 'lorena',
-// 	'email'=> 'lorena@deuce.com',
+// 	'name' => 'Moderador',
+// 	'email'=> 'moderador@fake.com',
 // 	'password' => bcrypt('123123'),
-// 	'role' => 'estudiante'
 // ]);
+
+Route::get('roles', function(){
+	return App\Role::with('user')->get();
+});
 
 
 Route::get('/', ['as' => 'home' , 'uses' => 'PagesController@home'])->middleware('example');
