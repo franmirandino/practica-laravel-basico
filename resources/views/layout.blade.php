@@ -37,7 +37,12 @@
 						@if(auth()->check())
 							<li class="{{ activeMenu('mensajes') }}">
 								<a href="{{ route('mensajes.index') }}">Mensajes</a>
-							</li>													
+							</li>
+							@if(auth()->user()->hasRole(['admin']))
+								<li class="{{ activeMenu('usuarios') }}">
+									<a href="{{ route('usuarios.index') }}">Usuarios</a>
+								</li>												
+							@endif	
 						@endif									
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
@@ -45,20 +50,14 @@
 							<li class="{{ activeMenu('/login') }}">
 								<a href="/login">Login</a>
 							</li>
-						@else
-							<li>
-								<a href="/logout">Cerrar sesión de {{ auth()->user()->name }}</a>	
-							</li>
-						@endif	
+						@else							
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ auth()->user()->name }} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li><a href="#">Separated link</a></li>
+								<li><a href="/logout">Cerrar sesión</a></li>								
 							</ul>
 						</li>
+						@endif	
 					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div>
