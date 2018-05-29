@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Message;
+use App\note;
+use App\tags;
+use App\user;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +26,7 @@ class MessagesController extends Controller
 
         // $messages = DB::table('messages')->get();
 
-        $messages = Message::all();
+        $messages = Message::with(['user', 'note', 'tags'])->get();
 
         return view('messages.index', compact('messages'));
     }

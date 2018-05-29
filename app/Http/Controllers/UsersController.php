@@ -22,7 +22,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::with(['roles', 'note', 'tags'])->get();
         return view('users.index', compact('users'));
     }
 
