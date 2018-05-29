@@ -2,13 +2,13 @@
 @unless( isset($message) and $message->user_id )
 	<label for="nombre">
 		Nombre
-		<input class="form-control" type="text" name="nombre" value="{{ old('nombre') }}">
+		<input class="form-control" type="text" name="nombre" value="{{ $message->nombre or old('nombre') }}">
 	{!! $errors->first('nombre', '<span class=error>:message</span>') !!}
 	</label><br><br>
 
 	<label for="email">
 		Email
-		<input class="form-control" type="email" name="email" value="{{ old('email') }}">
+		<input class="form-control" type="email" name="email" value="{{ $message->email or old('email') }}">
 	</label>
 	{!! $errors->first('email', '<span class=error>:message</span>') !!}
 	<br><br>
