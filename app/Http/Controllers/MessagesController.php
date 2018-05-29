@@ -9,6 +9,7 @@ use App\user;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class MessagesController extends Controller
 {
@@ -61,6 +62,9 @@ class MessagesController extends Controller
         $message->user_id = auth()->id();
         $message->save();
 
+        Mail::send('emails.contact',['msg' => $message], function($m) use ($message){
+            $m->to($message->email, $message->name)->subject('tu mensaje fue recibido');
+        });
         //redireccionar
         return redirect()->route('mensajes.create')->with('info', 'Hemos recibido su mensaje');
     }
