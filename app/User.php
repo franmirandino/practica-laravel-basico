@@ -4,6 +4,7 @@ namespace App;
 
 use App\Message;
 use App\Role;
+use App\Tag;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -62,6 +63,11 @@ class User extends Authenticatable
     public function note()
     {
         return $this->morphOne(Note::class, 'notable');
+    }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable')->withTimesTamps();
     }
 
 }
