@@ -29,6 +29,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    //creamos un mutador para que cuando se guarde una contraseña se encrypte automaticamente
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
     public function roles(){
         return $this->belongsToMany(Role::class, 'assigned_roles');
     }
@@ -52,4 +58,6 @@ class User extends Authenticatable
     {
        return $this->hasMany(Message::class);
     }
+
+
 }
