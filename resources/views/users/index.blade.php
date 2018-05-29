@@ -10,6 +10,7 @@
 				<th>Nombre</th>
 				<th>Email</th>
 				<th>Role</th>
+				<th>Notas</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
@@ -18,10 +19,15 @@
 			<tr>
 				<td>{{ $user->id }}</td>				
 				<td>{{ $user->name }}</td>				
-				<td>{{ $user->email }}</td>				
+				<td>{{ $user->email }}</td>							
 				<td>
 					{{ $user->roles->pluck('display_name')->implode(', ') }}
-				</td>				
+				</td>		
+				<td>
+					@if($user->note)
+						{{ $user->note->body }}
+					@endif
+				</td>		
 				<td>
 					<a class="btn btn-info btn-xs" 
 						href="{{ route('usuarios.edit', $user->id) }}">
