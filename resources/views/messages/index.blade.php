@@ -59,5 +59,6 @@
 			@endforeach
 		</tbody>
 	</table>
+			{!! $messages->appends(request()->query())->links('pagination::bootstrap-4') !!}
 
 @stop

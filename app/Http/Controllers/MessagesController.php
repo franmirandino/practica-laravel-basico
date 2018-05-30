@@ -18,6 +18,7 @@ class MessagesController extends Controller
     {
         $this->middleware('auth', ['except' => ['create', 'store'] ]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,9 +27,9 @@ class MessagesController extends Controller
     public function index()
     {
 
-        // $messages = DB::table('messages')->get();
-
-        $messages = Message::with(['user', 'note', 'tags'])->get();
+        $messages = Message::with(['user', 'note', 'tags'])
+            ->orderBy('created_at', request('sorted', 'DESC'))
+            ->paginate(10);
 
         return view('messages.index', compact('messages'));
     }
