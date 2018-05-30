@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageWasReceived;
 use App\Message;
 use App\note;
 use App\tags;
@@ -62,9 +63,11 @@ class MessagesController extends Controller
         $message->user_id = auth()->id();
         $message->save();
 
-        Mail::send('emails.contact',['msg' => $message], function($m) use ($message){
-            $m->to($message->email, $message->name)->subject('tu mensaje fue recibido');
-        });
+        event(new MessageWasReceived($message));
+
+        // Mail::send('emails.contact',['msg' => $message], function($m) use ($message){
+        //     $m->to($message->email, $message->name)->subject('tu mensaje fue recibido');
+        // });
         //redireccionar
         return redirect()->route('mensajes.create')->with('info', 'Hemos recibido su mensaje');
     }
