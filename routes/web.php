@@ -1,5 +1,13 @@
 <?php
 
+use App\Repositories\CacheMessages;
+use App\Repositories\Messages;
+use App\Repositories\MessagesInterface;
+
+
+
+app()->bind(MessagesInterface::class, CacheMessages::class);
+
 
 //revisamos la cantidad de consultas a la base de datos
 DB::listen(function($query){

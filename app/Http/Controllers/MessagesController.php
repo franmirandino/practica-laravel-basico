@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Events\MessageWasReceived;
 use App\Message;
+use App\Repositories\CacheMessages;
 use App\Repositories\Messages;
+use App\Repositories\MessagesInterface;
 use App\note;
 use App\tags;
 use App\user;
@@ -16,7 +18,7 @@ use Illuminate\Support\Facades\Mail;
 class MessagesController extends Controller
 {
     protected $messages;
-    public function __construct(Messages $messages)
+    public function __construct(MessagesInterface $messages)
     {
         $this->messages = $messages;
         $this->middleware('auth', ['except' => ['create', 'store'] ]);
