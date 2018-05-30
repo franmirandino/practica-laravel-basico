@@ -29,7 +29,7 @@ class MessagesController extends Controller
     {
         $key = "messages.page." . request('page', 1);
 
-        $messages = Cache::rememberForever($key, function(){
+        $messages = Cache::tags('messages')->rememberForever($key, function(){
             return  Message::with(['user', 'note', 'tags'])
                          ->orderBy('created_at', request('sorted', 'DESC'))
                          ->paginate(10);
@@ -62,7 +62,7 @@ class MessagesController extends Controller
 
         event(new MessageWasReceived($message));
 
-        Cache::flush();
+        Cache::tags('messages')->flush();
         //redireccionar
         return redirect()->route('mensajes.create')->with('info', 'Hemos recibido su mensaje');
     }
@@ -76,7 +76,7 @@ class MessagesController extends Controller
     public function show($id)
     {
 
-        $message = Cache::rememberForever("messages.{$id}", function() use ($id){
+        $message = Cache::tags('messages')->rememberForever("messages.{$id}", function() use ($id){
             return Message::findOrFail($id);
         });
 
@@ -91,7 +91,7 @@ class MessagesController extends Controller
      */
     public function edit($id)
     {
-        $message = Cache::rememberForever("messages.{$id}", function() use ($id){
+        $message = Cache::tags('messages')->rememberForever("messages.{$id}", function() use ($id){
             return Message::findOrFail($id);
         });
 
@@ -118,7 +118,7 @@ class MessagesController extends Controller
         $message = Message::findOrFail($id);
         $message->update($request->all());
 
-        Cache::flush();
+        Cache::tags('messages')->flush();
 
         //redireccionamos
         return redirect()->route('mensajes.index');
@@ -135,7 +135,7 @@ class MessagesController extends Controller
         // DB::table('messages')->where('id', $id)->delete();
         $message = Message::findOrFail($id)->delete();
 
-        Cache::flush();
+        Cache::tags('messages')->flush();
 
         return redirect()->route('mensajes.index');
     }
