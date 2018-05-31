@@ -1,9 +1,9 @@
 <?php
 
 //revisamos la cantidad de consultas a la base de datos
-DB::listen(function($query){
-	echo "<pre>{ $query->sql }</pre>";
-});
+// DB::listen(function($query){
+// 	echo "<pre>{ $query->sql }</pre>";
+// });
 
 
 // App\User::create([

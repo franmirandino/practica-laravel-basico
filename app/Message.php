@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Note;
+use App\Presenters\MessagePresenter;
 use App\Tag;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -24,6 +25,11 @@ class Message extends Model
     public function tags()
     {
     	return $this->morphToMany(Tag::class, 'taggable')->withTimesTamps();
+    }
+
+    public function present()
+    {
+        return new MessagePresenter($this);
     }
 
 
