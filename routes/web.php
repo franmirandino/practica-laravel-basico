@@ -1,5 +1,13 @@
 <?php
 
+
+// Route::get('job', function(){
+// 	dispatch(new App\Jobs\SendEmail);
+
+// 	return "listo!";
+// });
+
+
 //revisamos la cantidad de consultas a la base de datos
 // DB::listen(function($query){
 // 	echo "<pre>{ $query->sql }</pre>";

@@ -1,3 +1,6 @@
+
+
+
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -12762,3 +12765,7 @@ const app = new Vue({
 });
 
 //# sourceMappingURL=all.js.map
+
+$('form').on('submit', function(){
+	$(this).find('input[type=submit]').attr('disabled', true);
+});
