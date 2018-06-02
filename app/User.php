@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Message;
+use App\Presenters\UserPresenter;
 use App\Role;
 use App\Tag;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -70,4 +71,8 @@ class User extends Authenticatable
         return $this->morphToMany(Tag::class, 'taggable')->withTimesTamps();
     }
 
+    public function present()
+    {
+        return new UserPresenter($this);
+    }
 }
